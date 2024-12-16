@@ -62,8 +62,8 @@ class Ally(Sprite): #Create Ally
         if self.ycor() > 290: #If the y greater than 290
             self.sety(290) #Set Ally to y coordinate
             self.left(60)
-        if self.ycor() < -290:#If the y coordinate greater than 290
-            self.sety(-290) #Set Ally to x coordinate
+        if self.ycor() < -290:#If the y coordinate less than -290
+            self.sety(-290) #Set Ally to y coordinate
             self.left(60)
 class Missile(Sprite): #Create missile
     def __init__(self, spriteshape, color, startx, starty):
@@ -209,7 +209,7 @@ def game_loop():
             if missile.is_collision(enemy): #Check for collision between missile and the enemy
                 enemy.goto(random.randint(-250, 250), random.randint(-250, 250))
                 missile.status = "ready"#The missile's status is set to "ready", meaning the missile is no longer in flight and can be fired again later.
-                game.score += 100 #Increase the score
+                game.score += 50 #Increase the score
                 game.show_status()
                 for particle in particles:
                    particle.explode(missile.xcor(), missile.ycor())#Do the explosion, when missle hit enemy
@@ -218,7 +218,7 @@ def game_loop():
             if missile.is_collision(ally):
                 ally.goto(random.randint(-250, 250), random.randint(-250, 250))
                 missile.status = "ready"
-                game.score -= 100
+                game.score -= 200
                 game.show_status()
             if player.is_collision(ally):
                 ally.goto(random.randint(-250, 250), random.randint(-250, 250))
